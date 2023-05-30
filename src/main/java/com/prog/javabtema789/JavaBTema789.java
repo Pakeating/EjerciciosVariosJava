@@ -1,6 +1,9 @@
 
 package com.prog.javabtema789;
 import java.util.Scanner;
+import java.util.Vector;
+import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
  *Autor: Francisco Linares Santamaria
@@ -44,10 +47,13 @@ public class JavaBTema789 {
                     arrayBi();
                     break;
                 case 3:
+                    vectores();
                     break;
                 case 4:
+                    problemasVectores();
                     break;
                 case 5:
+                    arrayListYLinkedList();
                     break;
                 case 6:
                     break;
@@ -103,10 +109,33 @@ public class JavaBTema789 {
         System.out.println("================================================================");
     }
     public static void vectores(){
-        
+        Vector <Integer> vector=new Vector();
+        for(int i=1; i<6;i++){
+            vector.add(i);
+        }
+        vector.remove(1); // Se usa el uno en ambos ya que como cuenta desde 0, la segunda y tercera posicion son la numero 1 y 2, pero al eliminar la primera, disminuye el tamaño y la tercera pasa a ser la segunda.
+        vector.remove(1); 
+        System.out.println("Valores almacenados en el vector tras el borrado: ");
+        for(Integer i : vector){
+                System.out.println(i);
+        }
     }
     public static void problemasVectores(){
-    System.out.println();
+    System.out.println(" Un problema claro a la hora de usar los vectores para esa labor, es que cuando se supera el tamaño fijado, este se duplica, ");
+    System.out.println("pudiendo resultar en una clara perdida de rendimiento por la copia de los valores y de memoria por poder estar reservando una memoria necesaria que no se está utilizando.");
     }
-    
+    public static void arrayListYLinkedList(){
+        System.out.println("Almacenamos los numeros del 0 al 3 en formato numérico como String y se muestran por pantalla:");
+        ArrayList <String> miArrayList=new ArrayList<String>();
+        for (int i=0;i<4;i++){
+            miArrayList.add(""+i);
+        }
+        LinkedList <String> miLinkedList=new LinkedList <String>();
+        for (String e:miArrayList){
+            miLinkedList.add(e);
+        }
+        for (int i=0;i<4;i++){
+            System.out.println("Valor del ArrayList en la posicion "+i+" : "+miArrayList.get(i)+" | Valor del LinkedList "+ miLinkedList.get(i));
+        }
+    }
 }
