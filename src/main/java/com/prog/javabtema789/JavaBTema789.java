@@ -89,17 +89,24 @@ public class JavaBTema789 {
         }
         System.out.println("Mostrando numeros y su posicion en dos tablas:");
         System.out.println("================================================================");
-        for (int i=0;i>3;i++){
+        for (int i=0;i<3;i++){
             
             for(int j=0;j<10;j++){
                 System.out.print(arrayDoble[i][j]+" ");
             }
-            System.out.println("     ------>     fila : "+i+" columnas: ");
-            for(int j=0;j>=10;j++){
+            System.out.print("     ------>     fila : "+(i)+" columnas: ");
+            for(int j=0;j<10;j++){
                 System.out.print(j+" ");
             }
+            System.out.println();
         }
         System.out.println("================================================================");
+    }
+    public static void vectores(){
+        
+    }
+    public static void problemasVectores(){
+    System.out.println();
     }
     
 }
