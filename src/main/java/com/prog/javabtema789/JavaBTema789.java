@@ -56,6 +56,7 @@ public class JavaBTema789 {
                     arrayListYLinkedList();
                     break;
                 case 6:
+                    recorreArrayList();
                     break;
                 case 7:
                     break;
@@ -136,6 +137,17 @@ public class JavaBTema789 {
         }
         for (int i=0;i<4;i++){
             System.out.println("Valor del ArrayList en la posicion "+i+" : "+miArrayList.get(i)+" | Valor del LinkedList "+ miLinkedList.get(i));
+        }
+    }
+    public static void recorreArrayList(){
+        ArrayList <Integer> miArrayList=new ArrayList();       
+        for (Integer i=1;i<11;i++){
+            miArrayList.add(i);
+        }
+        miArrayList.removeIf(n->(n%2==0));
+        
+        for (Integer i=0;i<miArrayList.size();i++){
+            System.out.println(miArrayList.get(i));
         }
     }
 }
