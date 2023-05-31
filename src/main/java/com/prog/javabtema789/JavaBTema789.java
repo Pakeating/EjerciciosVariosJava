@@ -1,9 +1,18 @@
 
 package com.prog.javabtema789;
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintStream;
 import java.util.Scanner;
 import java.util.Vector;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *Autor: Francisco Linares Santamaria
@@ -66,8 +75,20 @@ public class JavaBTema789 {
                 }
                     break;
                 case 8:
-                    copiafichero();
+            
+                    try {
+                        PrintStream creafichero=new PrintStream("Fichero1.txt");
+                        creafichero.write(1);       //creo un fichero con datos que he metido aleatoriamente, solo para realizar el ejercicio.
+                        creafichero.write(23);
+                        creafichero.write(53456);
+                        creafichero.close();
+                    
+                    } catch (FileNotFoundException ex) {
+                        System.out.println("Error!");
+                    }
+                    copiafichero("Fichero1.txt","Fichero2.txt");
                     break;
+
                 case 9:
                     break;
                 case 10:
@@ -161,7 +182,30 @@ public class JavaBTema789 {
         int b=0;
         int c=a/b;
     }
-    public static void copiafichero(){
+    public static void copiafichero(String fileIn, String fileOut){
+        
+        try {
+            InputStream fichero=new FileInputStream(fileIn);
+            BufferedInputStream ficheroBuffer=new BufferedInputStream(fichero);
+            PrintStream ficheroNuevo=new PrintStream(fileOut);
+            
+            int dato=ficheroBuffer.read();
+            while (dato!=-1){
+                ficheroNuevo.write(dato);
+                dato=ficheroBuffer.read();
+            }
+            ficheroBuffer.close();
+            fichero.close();
+            ficheroNuevo.close();
+            
+        } catch (FileNotFoundException ex ) {
+            System.out.println("no existe el fichero! "+ ex.getMessage());
+        }
+        catch(IOException e){
+            System.out.println("error! "+ e.getMessage());
+        }
+        
         
     }
+    
 }
