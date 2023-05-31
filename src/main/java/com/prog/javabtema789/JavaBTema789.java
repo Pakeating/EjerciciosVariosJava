@@ -66,6 +66,7 @@ public class JavaBTema789 {
                 }
                     break;
                 case 8:
+                    copiafichero();
                     break;
                 case 9:
                     break;
@@ -159,5 +160,8 @@ public class JavaBTema789 {
         int a=3;
         int b=0;
         int c=a/b;
+    }
+    public static void copiafichero(){
+        
     }
 }
