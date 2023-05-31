@@ -10,6 +10,7 @@ import java.io.PrintStream;
 import java.util.Scanner;
 import java.util.Vector;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -35,7 +36,7 @@ public class JavaBTema789 {
         System.out.println("6 --> Crea un ArrayList de enteros y lo rellena con un bucle. Se recorre con otro y se eliminan los numeros pares. Se muestra");
         System.out.println("7 --> Divide por cero y lo gestiona mediante un throws y se captura la excepcion desde main, mostrando un mensaje");
         System.out.println("8 --> Mediante InputStream y PrintStream se copia un fichero fileIn  a uno fileOut");
-        System.out.println("9 --> Programa Propio");
+        System.out.println("9 --> Programa Propio: Calculo de costes de una obra");
         System.out.println("10 --> SALIR");
         System.out.println("==================================================================================================================================");
         
@@ -89,8 +90,26 @@ public class JavaBTema789 {
                     copiafichero("Fichero1.txt","Fichero2.txt");
                     break;
 
-                case 9:
+                case 9:     //Se trata de un programa que lee las tarifas de distintos profesionales en una supuesta reforma, 
+                            //calcula el coste dadas las horas de trabajo  y lo almacena en un archivo local.
+                            
+                    HashMap <String,Integer> horasTrabajadas=new HashMap<String,Integer>();
+                    horasTrabajadas.put("Diseñador",10);//Almacenamos los datos del hashmap que nos pide la funcion, con las horas de cada trabajador:
+                    horasTrabajadas.put("Electricista",40);
+                    horasTrabajadas.put("Albañil",100);
+                    horasTrabajadas.put("Fontanero",40);
+                    horasTrabajadas.put("Arquitecto",20);
+                    horasTrabajadas.put("Pintor",40);
+                    horasTrabajadas.put("Carpintero",20);
+                    
+                    try {
+                        obrasCasa(horasTrabajadas);
+                    } catch (FileNotFoundException ex) {
+                        System.out.println("No se ha encontrado el fichero");
+                    }
+                    System.out.println("Calculo realizado, las salidas están en el archivo Costo_total_mano_obra.txt ");
                     break;
+
                 case 10:
                     break;
                     
@@ -207,5 +226,38 @@ public class JavaBTema789 {
         
         
     }
-    
+    public static void obrasCasa(HashMap<String,Integer> horasTrabajo) throws FileNotFoundException{
+        //Se trata de un programa que lee las tarifas de distintos profesionales en una supuesta reforma, calcula el coste dadas las horas de trabajo  y lo almacena en un archivo local.
+        // El formato del archivo es el siguiente: NombreProfesional numeroTarifa(int), por ejemplo: Albañil 15
+        //Tras esto habrá un salto de linea.
+        InputStream fichero=new FileInputStream("profesionales.txt");
+        Scanner sc=new Scanner(fichero);
+        HashMap<String,Integer> tarifas= new HashMap<String,Integer>();
+        String nombre="";
+        Integer sueldo;
+        while(sc.hasNextLine()){        //Se lee el fichero y se almacena en el hashmap
+            nombre=sc.next();
+            sueldo=sc.nextInt();
+            tarifas.put(nombre,sueldo);
+            
+            try{sc.nextLine();}
+            catch(Exception e){}
+        }
+       
+        int[] manodeObra=new int[tarifas.size()];
+       PrintStream aPagar=new PrintStream("Costo_total_mano_obra.txt");
+        int contador=0;
+        for (String oficios : horasTrabajo.keySet()){ //extraigo los profesionales del hashmap que nos dan
+            manodeObra[contador]=tarifas.get(oficios);
+            manodeObra[contador]=horasTrabajo.get(oficios)*manodeObra[contador];
+            aPagar.println("Al "+oficios+" se le deben "+manodeObra[contador]+" euros");
+            contador++;
+        }
+        int total=0;
+        for(int i : manodeObra){
+            total+=i;
+        }
+        aPagar.println("En total se deben: "+ total+" euros a los profesionales contratados");
+               
+    }
 }

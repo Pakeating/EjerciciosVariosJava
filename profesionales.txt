@@ -1,0 +1,7 @@
+Diseñador 30
+Electricista 20
+Albañil 15
+Fontanero 18
+Arquitecto 50
+Pintor 20
+Carpintero 18
