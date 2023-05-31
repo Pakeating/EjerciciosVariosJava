@@ -59,6 +59,11 @@ public class JavaBTema789 {
                     recorreArrayList();
                     break;
                 case 7:
+                    try {
+                    divideporcero();
+                } catch (ArithmeticException arithmeticException) {
+                    System.out.println("No se puede dividir por cero!");
+                }
                     break;
                 case 8:
                     break;
@@ -149,5 +154,10 @@ public class JavaBTema789 {
         for (Integer i=0;i<miArrayList.size();i++){
             System.out.println(miArrayList.get(i));
         }
+    }
+    public static void divideporcero()throws ArithmeticException{
+        int a=3;
+        int b=0;
+        int c=a/b;
     }
 }
